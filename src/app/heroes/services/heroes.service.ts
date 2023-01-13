@@ -22,4 +22,16 @@ export class HeroesService {
   getSugerencias(termino:string):Observable<Heroes[]> {
     return this.http.get<Heroes[]>(`${environment.apiUrl}/heroes?q=${termino}&_limit=5`);
   }
+
+  agregarHero(hero: Heroes) {
+    return this.http.post<Heroes>(`${environment.apiUrl}/heroes`, hero)
+  }
+
+  actualizarHero(hero: Heroes) {
+    return this.http.put<Heroes>(`${environment.apiUrl}/heroes/${hero.id}`,hero)
+  }
+
+  borrarHero(hero: Heroes) {
+    return this.http.delete<any >(`${environment.apiUrl}/heroes/${hero.id}`)
+  }
 }

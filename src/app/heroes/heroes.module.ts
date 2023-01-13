@@ -24,7 +24,6 @@ import { ImagenPipe } from '../pipes/imagen.pipe';
     HomeComponent,
     ListadoComponent,
     HeroCardComponent,
-
     ImagenPipe
   ],
   imports: [
