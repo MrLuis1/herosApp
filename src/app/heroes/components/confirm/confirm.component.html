@@ -1,0 +1,21 @@
+<h1>¿ Estas seguro que deseas eliminar este registro ?</h1>
+<hr>
+<p>
+    El registro a eliminar es {{data.superhero}}
+    <br>
+    ¿ Desea continuar ?
+</p>
+
+<div>
+    <button mat-button 
+            (click)="borrar()" 
+            color="primary">
+        Borrar
+    </button>
+
+    <button mat-button
+            (click)="cerrar()"
+            color="warn">
+        Cancelar
+    </button>
+</div>

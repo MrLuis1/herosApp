@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Heroes, Publisher } from '../../interfaces/hero.interface';
 import { HeroesService } from '../../services/heroes.service';
 import { MatSnackBar, _SnackBarContainer } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmComponent } from '../../components/confirm/confirm.component';
 
 @Component({
   selector: 'app-agregar',
@@ -34,7 +36,8 @@ export class AgregarComponent implements OnInit{
   constructor( private heroService: HeroesService, 
                private activatedRoute: ActivatedRoute, 
                private router: Router, 
-               private snackBar: MatSnackBar ) { }
+               private snackBar: MatSnackBar,
+               private dialog: MatDialog ) { }
 
   ngOnInit(): void {
 
@@ -63,10 +66,21 @@ export class AgregarComponent implements OnInit{
   }
 
   borrar() {
-    this.heroService.borrarHero(this.heroe).subscribe(()=>{
-      this.mostrarSnakbar('Registro borrado con exito');
-      this.router.navigate(['/heroes/listado'])
+
+    const dialog = this.dialog.open( ConfirmComponent, {
+      width: '30%',
+      data: { ...this.heroe }
+    } )
+
+    dialog.afterClosed().subscribe(res => {
+      if(res) {
+        this.heroService.borrarHero(this.heroe).subscribe(()=>{
+          this.mostrarSnakbar('Registro borrado con exito');
+          this.router.navigate(['/heroes/listado'])
+        })
+      }
     })
+
   }
 
   mostrarSnakbar(mensaje: string) {
