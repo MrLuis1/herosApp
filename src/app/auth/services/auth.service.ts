@@ -25,7 +25,7 @@ export class AuthService {
     return this.http.get<Auth>(`${environment.apiUrl}/usuarios/1`)
       .pipe(
         map( auth => {
-          console.log(auth)
+          this.user = auth
           return true
         })
       )
